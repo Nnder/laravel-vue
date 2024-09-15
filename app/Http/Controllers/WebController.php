@@ -6,8 +6,10 @@ use Illuminate\Http\Request;
 
 class WebController extends Controller
 {
-    public function index(){
-        return view('home');
+    public function home(Request $request){
+        return view('home', [
+            'user' => $request->user()
+        ]);
     }
 
     public function login(){
