@@ -9,10 +9,11 @@ Route::middleware('guest')->group(function(){
 	Route::post('/register', [UserController::class, 'register'])->name('user.register');
 });
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
 Route::middleware('auth:sanctum')->group(function(){
 	Route::get('/logout', [UserController::class, 'logout'])->name('user.logout');
+    Route::post('/user/avatar', [UserController::class, 'uploadAvatar'])->name('user.avatar.upload');
 });
