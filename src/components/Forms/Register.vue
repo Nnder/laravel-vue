@@ -1,6 +1,7 @@
 <script setup>
 import { ref, computed, watch } from 'vue'
 import store from '../../store/store'
+import router from '../../router'
 import { useToast } from 'vue-toast-notification'
 
 const isAuthenticated = computed(() => store.getters.isAuthenticated)
