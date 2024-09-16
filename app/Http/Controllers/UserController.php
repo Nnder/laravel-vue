@@ -128,27 +128,21 @@ class UserController extends Controller
 
     public function uploadAvatar(Request $request)
     {
-        // Validate the image
         $request->validate([
             'avatar' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        // Handle the file upload
         if ($request->hasFile('avatar')) {
             $avatar = $request->file('avatar');
             $avatarName = time() . '.' . $avatar->getClientOriginalExtension();
 
-            // Move the file to the public/images/avatars directory
             $avatar->move(public_path('images/avatars'), $avatarName);
 
-            // Get the current authenticated user
             $user = Auth::user();
 
-            // Store the avatar path in the database
             $user->avatar = 'images/avatars/' . $avatarName;
             $user->save();
 
-            // Redirect back with success message
             return back();
         }
 
